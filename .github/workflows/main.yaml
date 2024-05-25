@@ -5,6 +5,22 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-      - name: test
+      - name: checkout
+        uses: actions/checkout@v2
+      - name: write file
         run: |
-          echo "test"
+          echo '{"labels": ["labels", "labels2"]}' > labels.json
+      # - name: uplaod
+      #   uses: actions/upload-artifact@v4
+      #   with:
+      #     path: ./labels.json
+      - name: download
+        uses: actions/download-artifact@v4
+        with:
+          name: "labels.json"
+      # - name: add labels
+      #   run: |
+      #     curl -X POST \
+      #     "https://api.github.com/repos/${{ github.repository }}/issues/${{ github.event.pull_request.number }}/labels" \
+      #     -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+      #     -d @labels.json
