@@ -10,6 +10,17 @@ const model = "gpt-35-turbo";
 const MAX_PATCH_COUNT = 2000;
 
 (async () => {
+  async function chat(path) {
+    const prompt = `Below is a code patch, please help me do a brief code review on it. Any bug risks and/or improvement suggestions are welcome. Answer me in Chinese:
+      ${path}
+    `
+    const client = new AzureOpenAI({ endpoint, apiKey, apiVersion, model });  
+    const result = await client.completions.create({ prompt, model, max_tokens: 128 });
+    for (const choice of result.choices) {
+      console.log(choice.text);
+    }
+  }
+
   const { Octokit } = await import("@octokit/rest");
   const [owner, repo] = repository.split('/')
   const { pull_request } = JSON.parse(event)
@@ -39,9 +50,7 @@ const MAX_PATCH_COUNT = 2000;
       continue;
     }
 
-    console.log('===', patch)
-
-    // const res = await chat(patch);
+    const res = await chat(patch);
 
     // if (!!res) {
     //   await octokit.pulls.createReviewComment({
@@ -56,14 +65,4 @@ const MAX_PATCH_COUNT = 2000;
     // }
   }
 })();
-
-async function chat(prompt = []) {
-  const client = new AzureOpenAI({ endpoint, apiKey, apiVersion, model });  
-  const result = await client.completions.create({ prompt, model, max_tokens: 128 });
-  for (const choice of result.choices) {
-    console.log(choice.text);
-  }
-}
-
-module.exports = { chat };
 
