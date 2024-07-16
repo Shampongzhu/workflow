@@ -1,5 +1,6 @@
 const { OpenAIClient, AzureKeyCredential } = require('@azure/openai');
-const { OPENAI_APIKEY } = process.env.REPO_SECRET
+const REPO_SECRET = process.env.REPO_SECRET
+console.log(REPO_SECRET)
 async function main() {
   const client = new OpenAIClient('https://chataihub3097202828.openai.azure.com/', new AzureKeyCredential(OPENAI_APIKEY));
 
