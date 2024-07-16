@@ -1,11 +1,11 @@
 const { OpenAIClient, AzureKeyCredential } = require('@azure/openai');
 const OPENAI_APIKEY = process.env.OPENAI_APIKEY
-console.log(OPENAI_APIKEY)
+
 async function main() {
   const client = new OpenAIClient('https://chataihub3097202828.openai.azure.com/', new AzureKeyCredential(OPENAI_APIKEY));
 
   const { choices } = await client.getCompletions(
-    'text-davinci-003', // assumes a matching model deployment or model name
+    'GPT-4o', // assumes a matching model deployment or model name
     ['Hello, world!'],
   );
 
