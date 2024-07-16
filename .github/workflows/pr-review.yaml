@@ -24,5 +24,5 @@ jobs:
         ENDPOINT: ${{ secrets.ENDPOINT }}
         REPO: ${{ github.repository }}
         TOKEN: ${{ github.token }}
-        EVENT: ${{ github.event }}
+        EVENT: ${{ toJson(github.event) }}
       run: node pr-review-script.js
