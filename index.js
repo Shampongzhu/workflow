@@ -1,1 +1,4 @@
-console.log("===test pr review===");
+import { run } from "probot";
+import { robot } from "./bot.js";
+
+run(robot)
