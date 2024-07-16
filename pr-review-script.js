@@ -11,7 +11,7 @@ const MAX_PATCH_LENGTH = 2000;
 
 (async () => {
   const { Octokit } = await import("@octokit/rest");
-  const [ower, repo] = repository.split('/')
+  const [owner, repo] = repository.split('/')
   const { pull_request } = JSON.parse(event)
 
   const octokit = new Octokit({
