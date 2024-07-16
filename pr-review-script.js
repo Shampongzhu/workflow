@@ -18,7 +18,7 @@ const MAX_PATCH_COUNT = 2000;
     console.log('====', prompt)
     const client = new AzureOpenAI({ endpoint, apiKey, apiVersion, model });  
     const { choices } = await client.completions.create({ prompt, model, max_tokens: 128 });
-    return choices
+    return choices[0]?.text
   }
 
   const { Octokit } = await import("@octokit/rest");
@@ -51,19 +51,18 @@ const MAX_PATCH_COUNT = 2000;
     }
 
     const res = await chat(patch);
-    console.log("++++++", res)
 
-    // if (!!res) {
-    //   await octokit.pulls.createReviewComment({
-    //     owner,
-    //     repo,
-    //     pull_number: pull_request.pull_number,
-    //     commit_id: commits[commits.length - 1].sha,
-    //     path: file.filename,
-    //     body: res,
-    //     position: patch.split('\n').length - 1,
-    //   });
-    // }
+    if (!!res) {
+      await octokit.pulls.createReviewComment({
+        owner,
+        repo,
+        pull_number: pull_request.pull_number,
+        commit_id: commits[commits.length - 1].sha,
+        path: file.filename,
+        body: res,
+        position: patch.split('\n').length - 1,
+      });
+    }
   }
 })();
 
