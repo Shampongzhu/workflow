@@ -18,16 +18,14 @@ const model = "gpt-35-turbo";
     auth: token
   });
 
-  console.log('===', pull_request)
+  const { data } = await octokit.rest.repos.compareCommits({
+    owner: ary[0],
+    repo: ary[1],
+    base: pull_request.base.sha, // 基准提交的 SHA
+    head: pull_request.head.sha  // 比较提交的 SHA
+  })
 
-  // const { data } = await octokit.rest.repos.compareCommits({
-  //   owner: ary[0],
-  //   repo: ary[1],
-  //   base: 'commit-sha-1', // 基准提交的 SHA
-  //   head: 'commit-sha-2'  // 比较提交的 SHA
-  // })
-
-  // console.log(data);
+  console.log(data);
 })();
 
 async function chat(prompt = []) {
