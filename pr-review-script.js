@@ -41,7 +41,7 @@ const MAX_PATCH_COUNT = 200000;
     const file = changedFiles[i];
     const patch = file.patch || '';
 
-    console.log('===', file, path)
+    console.log('===', file, patch)
     if (file.status !== 'modified' && file.status !== 'added') {
       continue;
     }
