@@ -19,4 +19,6 @@ jobs:
       run: npm install
 
     - name: Run PR review script
+      env:
+        REPO_SECRET: ${{ secrets.REPO_SECRET }}
       run: node pr-review-script.js
