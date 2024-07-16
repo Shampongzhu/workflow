@@ -7,11 +7,11 @@ const endpoint = process.env.ENDPOINT;
 const apiKey = process.env.OPENAI_APIKEY;
 const apiVersion = "2024-02-01";
 const model = "gpt-35-turbo";
-const MAX_PATCH_COUNT = 2000;
+const MAX_PATCH_COUNT = 200000;
 
 (async () => {
   async function chat(path) {
-    const prompt = `Below is a code patch, please help me do a brief code review on it. Any bug risks and/or improvement suggestions are welcome. Answer me in Chinese:
+    const prompt = `Below is a code patch, please help me do a brief code review on it. Any bug risks and/or improvement suggestions are welcome:
       ${path}
     `
 
@@ -31,8 +31,8 @@ const MAX_PATCH_COUNT = 2000;
   const { data } = await octokit.rest.repos.compareCommits({
     owner,
     repo,
-    base: pull_request.base.sha, // 基准提交的 SHA
-    head: pull_request.head.sha  // 比较提交的 SHA
+    base: pull_request.base.sha,
+    head: pull_request.head.sha
   })
 
   const { files: changedFiles, commits } = data;
@@ -41,6 +41,7 @@ const MAX_PATCH_COUNT = 2000;
     const file = changedFiles[i];
     const patch = file.patch || '';
 
+    console.log('===', file, path)
     if (file.status !== 'modified' && file.status !== 'added') {
       continue;
     }
