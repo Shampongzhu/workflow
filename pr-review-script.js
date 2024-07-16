@@ -5,7 +5,7 @@ async function main() {
   const client = new OpenAIClient('https://chataihub3097202828.openai.azure.com/', new AzureKeyCredential(OPENAI_APIKEY));
 
   const { choices } = await client.getCompletions(
-    'GPT-4o', // assumes a matching model deployment or model name
+    'gpt-35-turbo', // assumes a matching model deployment or model name
     ['Hello, world!'],
   );
 
