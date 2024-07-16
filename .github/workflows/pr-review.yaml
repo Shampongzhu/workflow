@@ -22,5 +22,6 @@ jobs:
       env:
         OPENAI_APIKEY: ${{ secrets.OPENAI_APIKEY }}
         ENDPOINT: ${{ secrets.ENDPOINT }}
-        GITHUB: ${{ github }}
+        REPO: ${{ github.repository }}
+        TOKEN: ${{ github.token }}
       run: node pr-review-script.js

@@ -1,12 +1,13 @@
 const { AzureOpenAI } = require("openai");
 
-const github = process.env.GITHUB
+const repo = process.env.REPO
+const token = process.env.TOKEN
 const endpoint = process.env.ENDPOINT;
 const apiKey = process.env.OPENAI_APIKEY;
 const apiVersion = "2024-02-01";
 const model = "gpt-35-turbo";
 
-console.log('===', github)
+console.log('===', repo, token)
 
 async function chat(prompt = []) {
   const client = new AzureOpenAI({ endpoint, apiKey, apiVersion, model });  
