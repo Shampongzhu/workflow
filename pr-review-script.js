@@ -11,7 +11,7 @@ const MAX_PATCH_COUNT = 200000;
 
 (async () => {
   async function chat(path) {
-    const prompt = `Below is a code patch, please help me do a brief code review on it. Any bug risks and/or improvement suggestions are welcome:
+    const prompt = `Below is a Github javascript code patch, please help me do a brief code review on it. Any bug risks and/or improvement suggestions are welcome:
       ${path}
     `
 
@@ -41,7 +41,6 @@ const MAX_PATCH_COUNT = 200000;
     const file = changedFiles[i];
     const patch = file.patch || '';
 
-    console.log('===', file, patch)
     if (file.status !== 'modified' && file.status !== 'added') {
       continue;
     }
