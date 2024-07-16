@@ -51,6 +51,7 @@ const MAX_PATCH_COUNT = 2000;
     }
 
     const res = await chat(patch);
+    console.log("++++++", res)
 
     // if (!!res) {
     //   await octokit.pulls.createReviewComment({
