@@ -14,11 +14,11 @@ const MAX_PATCH_COUNT = 2000;
     const prompt = `Below is a code patch, please help me do a brief code review on it. Any bug risks and/or improvement suggestions are welcome. Answer me in Chinese:
       ${path}
     `
+
+    console.log('====', prompt)
     const client = new AzureOpenAI({ endpoint, apiKey, apiVersion, model });  
-    const result = await client.completions.create({ prompt, model, max_tokens: 128 });
-    for (const choice of result.choices) {
-      console.log(choice.text);
-    }
+    const { choices } = await client.completions.create({ prompt, model, max_tokens: 128 });
+    return choices
   }
 
   const { Octokit } = await import("@octokit/rest");
