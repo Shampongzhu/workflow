@@ -25,7 +25,7 @@ const MAX_PATCH_LENGTH = 2000;
     head: pull_request.head.sha  // 比较提交的 SHA
   })
 
-  const { files: changedFiles, commits } = data.data;
+  const { files: changedFiles, commits } = data;
 
   for (let i = 0; i < changedFiles.length; i++) {
     const file = changedFiles[i];
