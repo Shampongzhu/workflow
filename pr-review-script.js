@@ -1,6 +1,6 @@
 const { AzureOpenAI } = require("openai");
 
-const repo = process.env.REPO
+const repository = process.env.REPO
 const token = process.env.TOKEN
 const event = process.env.EVENT
 const endpoint = process.env.ENDPOINT;
@@ -11,7 +11,7 @@ const MAX_PATCH_LENGTH = 2000;
 
 (async () => {
   const { Octokit } = await import("@octokit/rest");
-  const [ower, repo] = repo.split('/')
+  const [ower, repo] = repository.split('/')
   const { pull_request } = JSON.parse(event)
 
   const octokit = new Octokit({
