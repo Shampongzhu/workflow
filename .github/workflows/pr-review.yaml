@@ -17,15 +17,8 @@ jobs:
 
     - name: Install dependencies
       run: npm install
-
-    - name: Debug environment variables
-      run: |
-        echo "REPO_SECRET=${{ secrets.OPENAI_APIKEY }}"
-        echo "REPO_SECRET is set to: $REPO_SECRET"
-      env:
-        REPO_SECRET: ${{ secrets.OPENAI_APIKEY }}
     
     - name: Run PR review script
       env:
-        REPO_SECRET: ${{ secrets.OPENAI_APIKEY }}
+        OPENAI_APIKEY: ${{ secrets.OPENAI_APIKEY }}
       run: node pr-review-script.js
