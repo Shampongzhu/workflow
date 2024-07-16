@@ -7,7 +7,7 @@ const endpoint = process.env.ENDPOINT;
 const apiKey = process.env.OPENAI_APIKEY;
 const apiVersion = "2024-02-01";
 const model = "gpt-35-turbo";
-const MAX_PATCH_LENGTH = 2000;
+const MAX_PATCH_COUNT = 2000;
 
 (async () => {
   const { Octokit } = await import("@octokit/rest");
