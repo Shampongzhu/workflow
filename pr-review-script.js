@@ -1,5 +1,5 @@
-const { AzureOpenAI } = require("openai");
-const { Octokit } = require("@octokit/rest");
+import { AzureOpenAI } from "openai";
+import { Octokit } from "@octokit/rest";
 
 const repo = process.env.REPO
 const token = process.env.TOKEN
