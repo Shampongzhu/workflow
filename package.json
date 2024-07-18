@@ -9,7 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "openai": "^4.52.7",
+    "@azure/openai": "^1.0.0",
     "@octokit/rest": "^21.0.0"
   }
 }
