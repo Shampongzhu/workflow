@@ -1,4 +1,4 @@
-const { AzureOpenAI } = require("openai");
+const { OpenAIClient, AzureKeyCredential } = require("@azure/openai");
 
 const repository = process.env.REPO
 const token = process.env.TOKEN
@@ -9,18 +9,18 @@ const apiVersion = "2024-02-01";
 const model = "gpt-35-turbo";
 const MAX_PATCH_COUNT = 200000;
 
+const client = new OpenAIClient(
+  endpoint
+  new AzureKeyCredential(apiKey)
+);
+
 (async () => {
   async function chat(path) {
     const message = `下面是Github的代码提交补丁信息，请做一下代码审查，找出可能有风险的地方，尽量准确：
       ${path}
     `
-    const client = new AzureOpenAI({ endpoint, apiKey, apiVersion, model });  
-    const { choices } = await client.completions.create({
-      messages: [{ role: 'user', content: message }],
-      model
-    });
-    console.log(choices);
-    return choices[0].message?.content
+    const { id, created, choices, usage } = await client.getCompletions("zxp", [message]);
+    console.log('===', id, created, choices, usage)
   }
 
   const { Octokit } = await import("@octokit/rest");
@@ -54,17 +54,17 @@ const MAX_PATCH_COUNT = 200000;
 
     const res = await chat(patch);
 
-    if (!!res) {
-      await octokit.pulls.createReviewComment({
-        owner,
-        repo,
-        pull_number: number,
-        commit_id: commits[commits.length - 1].sha,
-        path: file.filename,
-        body: res,
-        position: patch.split('\n').length - 1,
-      });
-    }
+    // if (!!res) {
+    //   await octokit.pulls.createReviewComment({
+    //     owner,
+    //     repo,
+    //     pull_number: number,
+    //     commit_id: commits[commits.length - 1].sha,
+    //     path: file.filename,
+    //     body: res,
+    //     position: patch.split('\n').length - 1,
+    //   });
+    // }
   }
 })();
 
