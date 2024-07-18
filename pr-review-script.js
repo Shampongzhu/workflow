@@ -11,12 +11,12 @@ const MAX_PATCH_COUNT = 200000;
 
 (async () => {
   async function chat(path) {
-    const prompt = `Below is a Github javascript code patch, please help me do a brief code review on it. Any bug risks and/or improvement suggestions are welcome:
+    const prompt = `下面是Github的代码提交补丁信息，请做一下代码审查，找出可能有风险的地方，尽量准确：
       ${path}
     `
     console.log(prompt);
     const client = new AzureOpenAI({ endpoint, apiKey, apiVersion, model });  
-    const { choices } = await client.completions.create({ prompt, model, max_tokens: 4000 });
+    const { choices } = await client.completions.create({ prompt, model, max_tokens: 300 });
     return choices[0]?.text
   }
 
