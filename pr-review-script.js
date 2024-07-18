@@ -10,7 +10,7 @@ const model = "gpt-35-turbo";
 const MAX_PATCH_COUNT = 200000;
 
 const client = new OpenAIClient(
-  endpoint
+  endpoint,
   new AzureKeyCredential(apiKey)
 );
 
