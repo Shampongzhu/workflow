@@ -11,17 +11,15 @@ const MAX_PATCH_COUNT = 200000;
 
 (async () => {
   async function chat(path) {
-    let prompt = `下面是Github的代码提交补丁信息，请做一下代码审查，找出可能有风险的地方，尽量准确：
+    const message = `下面是Github的代码提交补丁信息，请做一下代码审查，找出可能有风险的地方，尽量准确：
       ${path}
     `
-    console.log('======\n')
-    console.log(prompt);
-    console.log('=====\n')
-
-    prompt = 'javascript中如保无法禁止使用eval，请给出保持代码安全的建议，尽量简洁准确：'
     const client = new AzureOpenAI({ endpoint, apiKey, apiVersion, model });  
-    const { choices } = await client.completions.create({ prompt, model, max_tokens: 300 });
-    return choices[0]?.text
+    const { choices } = await client.completions.create({
+      messages: [{ role: 'user', content: message }],
+      model
+    });
+    return choices[0]!.message?.content
   }
 
   const { Octokit } = await import("@octokit/rest");
