@@ -16,7 +16,7 @@ const MAX_PATCH_COUNT = 200000;
     `
     console.log(prompt);
     const client = new AzureOpenAI({ endpoint, apiKey, apiVersion, model });  
-    const { choices } = await client.completions.create({ prompt, model, max_tokens: 128 });
+    const { choices } = await client.completions.create({ prompt, model, max_tokens: 4000 });
     return choices[0]?.text
   }
 
