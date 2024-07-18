@@ -14,7 +14,7 @@ const MAX_PATCH_COUNT = 200000;
     const prompt = `Below is a Github javascript code patch, please help me do a brief code review on it. Any bug risks and/or improvement suggestions are welcome:
       ${path}
     `
-
+    console.log(prompt);
     const client = new AzureOpenAI({ endpoint, apiKey, apiVersion, model });  
     const { choices } = await client.completions.create({ prompt, model, max_tokens: 128 });
     return choices[0]?.text
