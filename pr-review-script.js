@@ -19,7 +19,8 @@ const MAX_PATCH_COUNT = 200000;
       messages: [{ role: 'user', content: message }],
       model
     });
-    return choices[0]!.message?.content
+    console.log(choices);
+    return choices[0].message?.content
   }
 
   const { Octokit } = await import("@octokit/rest");
