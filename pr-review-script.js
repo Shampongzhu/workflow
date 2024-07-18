@@ -14,7 +14,9 @@ const MAX_PATCH_COUNT = 200000;
     const prompt = `下面是Github的代码提交补丁信息，请做一下代码审查，找出可能有风险的地方，尽量准确：
       ${path}
     `
+    console.log('======\n')
     console.log(prompt);
+    console.log('=====\n')
     const client = new AzureOpenAI({ endpoint, apiKey, apiVersion, model });  
     const { choices } = await client.completions.create({ prompt, model, max_tokens: 300 });
     return choices[0]?.text
