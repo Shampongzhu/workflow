@@ -7,6 +7,7 @@ const event = process.env.EVENT;
 const endpoint = process.env.ENDPOINT;
 const apiKey = process.env.OPENAI_APIKEY;
 const model = "gpt-4o";
+const MAX_PATCH_COUNT = 500
 
 const client = new OpenAIClient(endpoint, new AzureKeyCredential(apiKey));
 // send msg to chatgpt
