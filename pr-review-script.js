@@ -15,12 +15,12 @@ async function chat(patch) {
   const { choices } = await client.getChatCompletions(model, [
     {
       role: "user",
-      content: `以下内容是Github代码提交的前后对比信息，请做一个简单的code review，校验是否有风险和可以优化的地方，请尽量简明扼要：
+      content: `以下内容是Github代码提交的前后对比信息，请做一个简单的code review，找出可能会出错或有安全风险的地方，请尽量简明扼要：
         "${patch}"
       `,
     },
   ]);
-  return choices[0]?.message?.content;
+  return choices[0].message.content;
 }
 
 // get pr information
