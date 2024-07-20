@@ -7,6 +7,7 @@ const event = process.env.EVENT;
 const endpoint = process.env.ENDPOINT;
 const apiKey = process.env.OPENAI_APIKEY;
 const model = "gpt-4o";
+const MAX_PATCH_COUNT = 500
 
 const client = new OpenAIClient(endpoint, new AzureKeyCredential(apiKey));
 // send msg to chatgpt
@@ -14,7 +15,7 @@ async function chat(patch) {
   const { choices } = await client.getChatCompletions(model, [
     {
       role: "user",
-      content: `以下内容是Github代码提交的前后对比信息，请做一个简单的code review，校验是否有风险和可以优化的地方：
+      content: `以下内容是Github代码提交的前后对比信息，请做一个简单的code review，校验是否有风险和可以优化的地方，请尽量简明扼要：
         "${patch}"
       `,
     },
