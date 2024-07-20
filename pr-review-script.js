@@ -11,6 +11,7 @@ const model = "gpt-4o";
 const client = new OpenAIClient(endpoint, new AzureKeyCredential(apiKey));
 // send msg to chatgpt
 async function chat(patch) {
+  console.log(patch)
   const { choices } = await client.getChatCompletions(model, [
     {
       role: "user",
