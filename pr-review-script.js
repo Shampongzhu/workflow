@@ -20,7 +20,7 @@ async function chat(patch) {
       `,
     },
   ]);
-  return choices[0]?.message.content;
+  return choices[0].message.content;
 }
 
 // get pr information
